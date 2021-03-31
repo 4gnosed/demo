@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import com.alibaba.fastjson.JSON;
-import com.example.demo.base.BaseBean;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -57,11 +55,11 @@ public class DemoTest extends RecursiveTask<Long> implements Comparator<Integer>
 //    }
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
 
-        ArrayList<String> s = new ArrayList<>();
-        List<String> list = s.subList(0, s.size());
+
     }
+
 
     private static void testParallel() {
         System.out.println(measureSumPerf(DemoTest::forSum, 50_000_000) + "msec");
@@ -484,55 +482,6 @@ public class DemoTest extends RecursiveTask<Long> implements Comparator<Integer>
         System.out.println(c2);
     }
 
-    private static void testGroupList() {
-        List<TranOcClearBookModel> clears = new ArrayList<>();
-        TranOcClearBookModel model = new TranOcClearBookModel();
-        model.setOrgcode("o1");
-        model.setAcctType("a1");
-        model.seteID(1);
-        clears.add(model);
-        TranOcClearBookModel model2 = new TranOcClearBookModel();
-        model2.setOrgcode("o2");
-        model2.setAcctType("a2");
-        model2.seteID(2);
-        clears.add(model2);
-        TranOcClearBookModel model3 = new TranOcClearBookModel();
-        model3.setOrgcode("o3");
-        model3.setAcctType("a3");
-        model3.seteID(3);
-        clears.add(model3);
-        TranOcClearBookModel model4 = new TranOcClearBookModel();
-        model4.setOrgcode("o1");
-        model4.setAcctType("a1");
-        model4.seteID(4);
-        clears.add(model4);
-        TranOcClearBookModel model5 = new TranOcClearBookModel();
-        model5.setOrgcode("o5");
-        model5.setAcctType("a5");
-        model5.seteID(5);
-        clears.add(model5);
-        TranOcClearBookModel model6 = new TranOcClearBookModel();
-        model6.setOrgcode("o6");
-        model6.setAcctType("a6");
-        model.seteID(6);
-        clears.add(model6);
-        log.info("size：{}，{}", clears.size(), JSON.toJSONString(clears));
-
-        Map<String, List<TranOcClearBookModel>> map = clears.stream().collect(Collectors.groupingBy(o -> o.getOrgcode() + "_" + o.getAcctType()));
-        log.info("DayReportDeptAcctService，根据 部门_账户类型 作为key进行分组map：{}", JSON.toJSONString(map));
-
-
-        for (String orgCode_AcctType : map.keySet()) {
-            System.out.println("\n\n");
-            //拆分key
-            log.info("orgCode_AcctType:" + orgCode_AcctType);
-            int i = orgCode_AcctType.indexOf("_");
-            String orgCode = orgCode_AcctType.substring(0, i);
-            String acctType = orgCode_AcctType.substring(i + 1);
-            log.info("拆分key,orgCode:{},acctType:{}", orgCode, acctType);
-            log.info("map啊啊啊啊啊啊啊啊啊:{}", JSON.toJSONString(map.get(orgCode_AcctType)));
-        }
-    }
 
     private static void testBeanCopier() {
         FromBean fromBean = new FromBean();
@@ -590,13 +539,6 @@ public class DemoTest extends RecursiveTask<Long> implements Comparator<Integer>
 
         String name = "http://ns1.jieshunpay.cn/h5-cs/mgr-web/index.html#/login";
         System.out.println(URLEncoder.encode(name, "utf-8"));
-        List<BaseBean> list = new ArrayList<>();
-        list.sort(new Comparator<BaseBean>() {
-            @Override
-            public int compare(BaseBean o1, BaseBean o2) {
-                return o1.getCurrentPage() - o2.getCurrentPage();
-            }
-        });
 
 
         DemoTest demoTest = new DemoTest();
