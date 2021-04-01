@@ -2,7 +2,10 @@ package com.example.demo;
 
 import java.time.*;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
 
 /**
  * @Package: com.example.demo
@@ -61,5 +64,23 @@ public class Java8DateTime {
         Period tenDays1 = Period.ofDays(10);
         Period threeWeeks = Period.ofWeeks(3);
         Period twoYearsSixMonthsOneDay = Period.of(2, 6, 1);
+
+        LocalDate date1 = LocalDate.of(2001, 2, 27);
+        LocalDate date5 = date1.plusDays(2);
+        LocalDate date2 = date1.plusWeeks(2);
+        LocalDate date3 = date2.minusYears(3);
+        LocalDate date4 = date3.plus(6, ChronoUnit.MONTHS);
+
+
+        TemporalAdjuster nextWorkingDay = TemporalAdjusters.ofDateAdjuster(
+                temporal -> {
+                    DayOfWeek dow1 =
+                            DayOfWeek.of(temporal.get(ChronoField.DAY_OF_WEEK));
+                    int dayToAdd = 1;
+                    if (dow1 == DayOfWeek.FRIDAY) dayToAdd = 3;
+                    if (dow1 == DayOfWeek.SATURDAY) dayToAdd = 2;
+                    return temporal.plus(dayToAdd, ChronoUnit.DAYS);
+                });
+        date = date.with(nextWorkingDay);
     }
 }
