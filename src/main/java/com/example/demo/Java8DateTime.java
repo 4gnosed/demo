@@ -1,11 +1,13 @@
 package com.example.demo;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
+import java.util.TimeZone;
 
 /**
  * @Package: com.example.demo
@@ -17,8 +19,35 @@ import java.time.temporal.TemporalAdjusters;
 public class Java8DateTime {
 
     public static void main(String[] args) {
-        localDateTime();
+        formatDateTime();
     }
+
+    private static void formatDateTime(){
+        LocalDate date = LocalDate.of(2014, 3, 18);
+        String s1 = date.format(DateTimeFormatter.BASIC_ISO_DATE);//20140318
+        String s2 = date.format(DateTimeFormatter.ISO_LOCAL_DATE);//2014-03-18
+
+        LocalDate date1 = LocalDate.parse("20140318",
+                DateTimeFormatter.BASIC_ISO_DATE);
+        LocalDate date2 = LocalDate.parse("2014-03-18",
+                DateTimeFormatter.ISO_LOCAL_DATE);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String formattedDate = date.format(formatter);
+        LocalDate date4 = LocalDate.parse(formattedDate, formatter);
+
+
+        ZoneId zoneId = TimeZone.getDefault().toZoneId();
+
+        ZoneId romeZone = ZoneId.of("America/New_York");
+        ZonedDateTime zdt1 = date.atStartOfDay(romeZone);
+        LocalDateTime dateTime = LocalDateTime.of(2014, Month.MARCH, 18, 13, 45);
+        ZonedDateTime zdt2 = dateTime.atZone(romeZone);
+        Instant instant = Instant.now();
+        ZonedDateTime zdt3 = instant.atZone(romeZone);
+
+    }
+
 
     private static void localDateTime(){
 
