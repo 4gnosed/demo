@@ -1,7 +1,10 @@
-package com.example.demo;
+package com.example.demo.main;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,6 +45,7 @@ class Banana extends Fruit {
 }
 
 @Transactional
+@Slf4j
 public class DemoTest extends RecursiveTask<Long> implements Comparator<Integer> {
 
     private static ForkJoinPool forkJoinPool = new ForkJoinPool();
@@ -49,18 +53,125 @@ public class DemoTest extends RecursiveTask<Long> implements Comparator<Integer>
     private static DemoTest demoTest = new DemoTest();
     private String s;
 
-    static org.slf4j.Logger log = LoggerFactory.getLogger(DemoTest.class);
-
 //    DemoTest(){
 //        System.out.println("create....");
 //    }
 
-
-    public static void main(String[] args) throws Exception {
-        getCapacity();
+    public static Long getEveryDayTime() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.add(Calendar.DATE, 1);
+        return calendar.getTimeInMillis();
     }
 
-    static void getCapacity() throws Exception{
+    public static void main(String[] args) throws Exception {
+
+    }
+
+    public ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        // 创建 2 个变量分别表示前一个节点，和后一个节点
+        ListNode prev = null, tmp = null;
+        prev = head;
+        tmp = head.next;
+
+        while (tmp != null) {
+//            // 记录后一个节点，避免信息丢失
+//            tmp = head.next;
+//
+//            // 反转：使当前 next 指针之前之前的节点
+//            head.next = prev;
+//
+//            // 为接下来的操作作准备：移动前一个指针到当前
+//            prev = head;
+//
+//            // 为接下来的操作作准备：移动当前指针到后一个
+//            head = tmp;
+            tmp.next=prev;
+            prev=tmp;
+            tmp=tmp.next;
+
+        }
+        head.next=null;
+
+        // 返回反转后的链表
+        return prev;
+    }
+
+    private static void copyList() {
+        ArrayList<User> list = new ArrayList<>();
+        User user = User.builder().name("11").user(User.builder().name("22").user(User.builder().name("33").user(User.builder().name("44").build()).build()).build()).build();
+        list.add(user);
+
+        List<User> list1 = list.parallelStream().collect(Collectors.toList());
+
+        List<JSONObject> jslist = JSON.parseArray(JSON.toJSONString(list), JSONObject.class);
+        user.setName("jfkda");
+        for (User u : list) {
+            System.out.println(u);
+        }
+        for (JSONObject js : jslist) {
+            System.out.println(js);
+        }
+
+        for (User u : list1) {
+            System.out.println(u.toString());
+        }
+    }
+
+    private static void catchException() {
+        User user = User.builder().name("namefda").build();
+        try {
+            int i=0;
+            int j=1;
+            int z = j / i;
+        }catch (Exception e){
+            log.info("user啊：{}", JSON.toJSONString(user));
+            log.error("报错啦：",e);
+        }
+    }
+
+//    private static void ihavenoname() {
+//        ArrayBlockingQueue<String> abq = new ArrayBlockingQueue<>(5);
+//        ArrayList<User> users = new ArrayList<User>();
+//        users.add(new User("tom", "bb", "cc", 100L));
+//        users.add(new User("tom", "bb", "cc", 5000L));
+//        users.add(new User("tom", "dd", "ee", 30L));
+//        users.add(new User("jerry", "dd", "ee", 40L));
+//        users.add(new User("jerry", "dd", "ee", 200L));
+//        users.add(new User("jerry", "dd", "ee", 20L));
+//        Map<String, User> userMap = users.stream().sorted(Comparator.comparing(User::getScope)).collect(Collectors.toMap(User::getName, Function.identity(), (b1, b2) -> b2));
+//        for (String s : userMap.keySet()) {
+//            System.out.println(userMap.get(s));
+//        }
+//    }
+//
+//    private static void summaryMultiKey() {
+//        ArrayList<User> users = new ArrayList<User>();
+//        users.add(new User("tom", "bb", "cc", 100L));
+//        users.add(new User("tom", "bb", "cc", 50L));
+//        users.add(new User("jerry", "dd", "ee", 30L));
+//        users.add(new User("jerry", "dd", "ee", 40L));
+//
+//        users.stream()
+//                .collect(Collectors
+//                        .groupingBy(
+//                                user -> User.builder().name(user.name).phone(user.phone).address(user.address).build(),
+//                                Collectors.summarizingLong(user -> user.scope)
+//                        )
+//                )
+//                .forEach((k, v) -> {
+//                    k.scope = v.getSum();
+//                    System.out.println(k);
+//                });
+//    }
+
+    static void getCapacity() throws Exception {
 
         //指定初始容量15来创建一个HashMap
         HashMap m = new HashMap(15);
@@ -517,6 +628,8 @@ public class DemoTest extends RecursiveTask<Long> implements Comparator<Integer>
         ToBean toBean = new ToBean();
 
         BeanCopier beanCopier = BeanCopier.create(FromBean.class, ToBean.class, false);
+        beanCopier.copy(fromBean, toBean, null);
+
         long begin1 = System.nanoTime();
         for (int i = 0; i < 1000000; i++) {
             beanCopier.copy(fromBean, toBean, null);

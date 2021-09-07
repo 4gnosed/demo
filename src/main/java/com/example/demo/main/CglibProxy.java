@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.main;
 
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;

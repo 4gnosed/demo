@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.generator;
 
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
