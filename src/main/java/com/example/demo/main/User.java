@@ -1,9 +1,6 @@
 package com.example.demo.main;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * @Package: com.example.demo
@@ -16,6 +13,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
+@NoArgsConstructor
 public class User {
     String name;
     String phone;

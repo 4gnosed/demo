@@ -67,7 +67,26 @@ public class DemoTest extends RecursiveTask<Long> implements Comparator<Integer>
     }
 
     public static void main(String[] args) throws Exception {
+              User user = (User) setterByReflect(User.class);
+        System.out.println(JSON.toJSONString(user));
+    }
 
+    private static Object setterByReflect(Class<?> aClass){
+        Object o1=null;
+        try {
+            o1 = aClass.getDeclaredConstructor().newInstance();
+            Field[] fields = aClass.getDeclaredFields();
+            for (Field field : fields) {
+                if(field.getType()==String.class){
+                    field.set(o1,"-");
+                }else if(field.getType()==Long.class){
+                    field.set(o1,152L);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return o1;
     }
 
     public ListNode reverseList(ListNode head) {
