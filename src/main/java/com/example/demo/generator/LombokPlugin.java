@@ -3,10 +3,7 @@ package com.example.demo.generator;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
-import org.mybatis.generator.api.dom.java.Field;
-import org.mybatis.generator.api.dom.java.Interface;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.TopLevelClass;
+import org.mybatis.generator.api.dom.java.*;
 import org.mybatis.generator.internal.util.StringUtility;
 
 import java.text.SimpleDateFormat;
@@ -91,6 +88,10 @@ public class LombokPlugin extends PluginAdapter {
         interfaze.addJavaDocLine("/**");
         interfaze.addJavaDocLine("* Created by Mybatis Generator on " + date2Str(new Date()));
         interfaze.addJavaDocLine("*/");
+
+        //添加domain的import
+        interfaze.addImportedType(new FullyQualifiedJavaType("org.springframework.stereotype.Repository"));
+        interfaze.addAnnotation("@Repository");
         return true;
     }
 
