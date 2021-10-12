@@ -12,6 +12,15 @@ import com.alibaba.fastjson.JSON;
 
 public class Practice {
     public static void main(String[] args) {
+        cloneObject();
+
+
+    }
+
+    /**
+     * 对象拷贝
+     */
+    private static void cloneObject() {
         JustBean justBean = new JustBean();
         justBean.setName("name");
         JustBean in = new JustBean();
@@ -27,9 +36,5 @@ public class Practice {
         System.out.println(JSON.toJSONString(shallowClone));
         System.out.println(JSON.toJSONString(deepClone));
         System.out.println(JSON.toJSONString(fastJsonParse));
-
-
-
-
     }
 }
