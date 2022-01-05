@@ -1,13 +1,16 @@
 package com.example.demo.main;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.example.demo.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import sun.misc.Unsafe;
 
 import java.io.*;
 import java.lang.reflect.Field;
@@ -22,6 +25,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.Function;
@@ -67,11 +71,63 @@ public class DemoTest extends RecursiveTask<Long> implements Comparator<Integer>
         return calendar.getTimeInMillis();
     }
 
+    static class Count {
+
+        // 共享变量
+        private Integer count = 0;
+
+        public Integer getCount() {
+            return count;
+        }
+
+        public void increase() {
+            count++;
+        }
+    }
+
+    public static boolean isNumber(String str) {
+        Pattern pattern = Pattern.compile("^?([0-9]+|[0-9]{1,3}(,[0-9]{3})*)(.[0-9]{1,2})?$");
+        Matcher match = pattern.matcher(str);
+        return  match.matches();
+    }
+
     public static void main(String[] args) throws Exception {
-        String key ="rechargeNotice:RC892478522495475712:600";
-        int index = key.lastIndexOf(":");
-        String key_ = key.substring(0,index);
-        System.out.println(key_);
+
+    }
+
+    private static void travelDay() {
+        String startTime = "20211127";
+        String endTime = "20211214";
+        Date startDate = DateUtil.parseFormatDateTwo(startTime);
+        Date endDate = DateUtil.parseFormatDateTwo(endTime);
+        while (endDate.compareTo(startDate) >= 0) {
+            String handleDate = DateUtil.format(startDate, DateUtil.PATTERN_DATE_TWO);
+            System.out.print("," + handleDate);
+            startDate = DateUtil.addDay(startDate, 1);
+        }
+    }
+
+    private static void retryCircle() {
+        flag:
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 5; j++) {
+                System.out.print(j + ", ");
+                if (j == 3) {
+                    break flag;
+                }
+            }
+        }
+        System.out.println();
+
+        flag_:
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 5; j++) {
+                System.out.print(j + ", ");
+                if (j == 3) {
+                    continue flag_;
+                }
+            }
+        }
     }
 
     private static Object setterByReflect(Class<?> aClass){

@@ -1141,8 +1141,9 @@ public class DateUtil
 		String dateFormat="ss mm HH dd MM ? yyyy";
 		return formatDateByPattern(date, dateFormat);
 	}
-	
-	
-	
 
+
+	public static Date parseFormatDateTwo(String aDateStr) {
+		return parseFormatDate(aDateStr, PATTERN_DATE_TWO);
+	}
 }
