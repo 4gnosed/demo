@@ -53,6 +53,10 @@ public class TwinsLock implements Lock {
         protected int count() {
             return getState();
         }
+
+        final ConditionObject newCondition() {
+            return new ConditionObject();
+        }
     }
 
 
@@ -83,6 +87,6 @@ public class TwinsLock implements Lock {
 
     @Override
     public Condition newCondition() {
-        return null;
+        return sync.newCondition();
     }
 }
