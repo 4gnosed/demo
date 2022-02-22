@@ -92,7 +92,7 @@ public class DemoTest extends RecursiveTask<Long> implements Comparator<Integer>
     }
 
     public static void main(String[] args) throws Exception {
-
+        testJdkAop();
     }
 
     private static void travelDay() {
@@ -643,6 +643,7 @@ public class DemoTest extends RecursiveTask<Long> implements Comparator<Integer>
         TestInterfaceImpl target = new TestInterfaceImpl();
         TestInterface proxy = (TestInterface) Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), new CustomHandler(target));
         proxy.sayHello("jjjjjjjjjdka");
+        proxy.sayHello("FDJKLA",99);
     }
 
     private static void testArrayList() {

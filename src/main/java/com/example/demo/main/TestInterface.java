@@ -10,4 +10,5 @@ public interface TestInterface {
     void sayWhat();
 
     void sayHello(String msg);
+    void sayHello(String msg,int i);
 }

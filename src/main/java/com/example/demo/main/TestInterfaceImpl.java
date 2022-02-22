@@ -17,4 +17,9 @@ public class TestInterfaceImpl implements TestInterface {
     public void sayHello(String msg) {
         System.out.println("Iam Hello..." + msg);
     }
+
+    @Override
+    public void sayHello(String msg, int i) {
+        System.out.println("msg:" + msg + "i:" + i);
+    }
 }
