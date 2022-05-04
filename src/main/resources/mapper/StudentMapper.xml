@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatisx.mapper.StudentMapper">
+
+    <resultMap id="BaseResultMap" type="mybatisx.entity.Student">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="studentId" column="student_id" jdbcType="INTEGER"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="gender" column="gender" jdbcType="CHAR"/>
+            <result property="birthday" column="birthday" jdbcType="DATE"/>
+            <result property="idCard" column="id_card" jdbcType="CHAR"/>
+            <result property="nationId" column="nation_id" jdbcType="INTEGER"/>
+            <result property="nativePlace" column="native_place" jdbcType="VARCHAR"/>
+            <result property="politicId" column="politic_id" jdbcType="INTEGER"/>
+            <result property="email" column="email" jdbcType="VARCHAR"/>
+            <result property="phone" column="phone" jdbcType="VARCHAR"/>
+            <result property="address" column="address" jdbcType="VARCHAR"/>
+            <result property="topDegree" column="top_degree" jdbcType="VARCHAR"/>
+            <result property="school" column="school" jdbcType="VARCHAR"/>
+            <result property="departmentId" column="department_id" jdbcType="INTEGER"/>
+            <result property="specialtyId" column="specialty_id" jdbcType="INTEGER"/>
+            <result property="positionId" column="position_id" jdbcType="INTEGER"/>
+            <result property="languageLevel" column="language_level" jdbcType="VARCHAR"/>
+            <result property="computerLevel" column="computer_level" jdbcType="VARCHAR"/>
+            <result property="beginDate" column="begin_date" jdbcType="DATE"/>
+            <result property="endDate" column="end_date" jdbcType="DATE"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,student_id,name,
+        gender,birthday,id_card,
+        nation_id,native_place,politic_id,
+        email,phone,address,
+        top_degree,school,department_id,
+        specialty_id,position_id,language_level,
+        computer_level,begin_date,end_date
+    </sql>
+</mapper>
