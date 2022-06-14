@@ -1,5 +1,7 @@
 package com.example.demo.main;
 
+import org.openjdk.jol.info.ClassLayout;
+
 /**
  * @Package: com.example.demo
  * @Description:
@@ -8,13 +10,10 @@ package com.example.demo.main;
  */
 
 public class Main {
+     int i =1;
+     long j =1;
     public static void main(String[] args) {
-        String s = "abc";
-        switch (s){
-            case "abc":System.out.println(0);break;
-            case "bda":System.out.println(1);break;
-            case "cda":System.out.println(2);break;
-            default:System.out.println("defffffffault");
-        }
+        final Main main = new Main();
+        System.out.println(ClassLayout.parseInstance(main).toPrintable());
     }
 }
