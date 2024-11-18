@@ -16,8 +16,8 @@ import java.util.function.Supplier;
 
 public class AsynchronizedTest {
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws Exception {
+        whenComplete();
     }
 
     /**
@@ -28,7 +28,7 @@ public class AsynchronizedTest {
         CompletableFuture<Integer> f1 = CompletableFuture.supplyAsync(new Supplier<Integer>() {
             @Override
             public Integer get() {
-                int t = new Random().nextInt(5);
+                int t = new Random().nextInt(5)+1;
                 try {
                     TimeUnit.SECONDS.sleep(t);
                 } catch (InterruptedException e) {
@@ -41,7 +41,7 @@ public class AsynchronizedTest {
         CompletableFuture<Integer> f2 = CompletableFuture.supplyAsync(new Supplier<Integer>() {
             @Override
             public Integer get() {
-                int t = new Random().nextInt(5);
+                int t = new Random().nextInt(5)+1;
                 try {
                     TimeUnit.SECONDS.sleep(t);
                 } catch (InterruptedException e) {
@@ -155,24 +155,21 @@ public class AsynchronizedTest {
     private static void whenComplete() {
         //runAsync 不支持返回值
         //supplyAsync 支持返回值
-        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-            }
+        CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
             if (new Random().nextInt() % 2 >= 0) {
                 int i = 12 / 0;
             }
             System.out.println("run end ...");
-        }).whenComplete(new BiConsumer<Void, Throwable>() {
+            return "good";
+        }).whenComplete(new BiConsumer<String, Throwable>() {
             @Override
-            public void accept(Void t, Throwable action) {
-                System.out.println("执行完成！");
+            public void accept(String t, Throwable action) {
+                System.out.println("执行完成！t=" + t);
             }
 
-        }).exceptionally(new Function<Throwable, Void>() {
+        }).exceptionally(new Function<Throwable, String>() {
             @Override
-            public Void apply(Throwable t) {
+            public String apply(Throwable t) {
                 System.out.println("执行失败！" + t.getMessage());
                 return null;
             }
