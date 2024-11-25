@@ -5,13 +5,23 @@ import java.util.*;
 
 public class LeetCode215 {
     public int findKthLargest(int[] nums, int k) {
-        int n = nums.length;
-        PriorityQueue<Integer> q = new PriorityQueue<>(n,Comparator.reverseOrder());
-        for(int i: nums){
-            q.offer(i);
-        }
-        for(int i=0;i<k-1;i++){
-            q.poll();
+//        int n = nums.length;
+//        PriorityQueue<Integer> q = new PriorityQueue<>(n,Comparator.reverseOrder());
+//        for(int i: nums){
+//            q.offer(i);
+//        }
+//        for(int i=0;i<k-1;i++){
+//            q.poll();
+//        }
+        //优化
+        PriorityQueue<Integer> q = new PriorityQueue<>(k, Comparator.naturalOrder());
+        for (int num : nums) {
+            if (q.size() < k) {
+                q.offer(num);
+            } else if (q.peek() < num) {
+                q.poll();
+                q.offer(num);
+            }
         }
         return q.peek();
     }
