@@ -15,7 +15,7 @@ import lombok.Data;
  * @TableName student
  */
 @TableName(value ="student")
-@Data
+//@Data
 public class Student extends Dog implements Serializable {
     /**
      * 毕业生ID
@@ -125,69 +125,69 @@ public class Student extends Dog implements Serializable {
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
-
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        Student other = (Student) that;
-        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getStudentId() == null ? other.getStudentId() == null : this.getStudentId().equals(other.getStudentId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getGender() == null ? other.getGender() == null : this.getGender().equals(other.getGender()))
-            && (this.getBirthday() == null ? other.getBirthday() == null : this.getBirthday().equals(other.getBirthday()))
-            && (this.getIdCard() == null ? other.getIdCard() == null : this.getIdCard().equals(other.getIdCard()))
-            && (this.getNationId() == null ? other.getNationId() == null : this.getNationId().equals(other.getNationId()))
-            && (this.getNativePlace() == null ? other.getNativePlace() == null : this.getNativePlace().equals(other.getNativePlace()))
-            && (this.getPoliticId() == null ? other.getPoliticId() == null : this.getPoliticId().equals(other.getPoliticId()))
-            && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
-            && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
-            && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
-            && (this.getTopDegree() == null ? other.getTopDegree() == null : this.getTopDegree().equals(other.getTopDegree()))
-            && (this.getSchool() == null ? other.getSchool() == null : this.getSchool().equals(other.getSchool()))
-            && (this.getDepartmentId() == null ? other.getDepartmentId() == null : this.getDepartmentId().equals(other.getDepartmentId()))
-            && (this.getSpecialtyId() == null ? other.getSpecialtyId() == null : this.getSpecialtyId().equals(other.getSpecialtyId()))
-            && (this.getPositionId() == null ? other.getPositionId() == null : this.getPositionId().equals(other.getPositionId()))
-            && (this.getLanguageLevel() == null ? other.getLanguageLevel() == null : this.getLanguageLevel().equals(other.getLanguageLevel()))
-            && (this.getComputerLevel() == null ? other.getComputerLevel() == null : this.getComputerLevel().equals(other.getComputerLevel()))
-            && (this.getBeginDate() == null ? other.getBeginDate() == null : this.getBeginDate().equals(other.getBeginDate()))
-            && (this.getEndDate() == null ? other.getEndDate() == null : this.getEndDate().equals(other.getEndDate()));
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getStudentId() == null) ? 0 : getStudentId().hashCode());
-        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getGender() == null) ? 0 : getGender().hashCode());
-        result = prime * result + ((getBirthday() == null) ? 0 : getBirthday().hashCode());
-        result = prime * result + ((getIdCard() == null) ? 0 : getIdCard().hashCode());
-        result = prime * result + ((getNationId() == null) ? 0 : getNationId().hashCode());
-        result = prime * result + ((getNativePlace() == null) ? 0 : getNativePlace().hashCode());
-        result = prime * result + ((getPoliticId() == null) ? 0 : getPoliticId().hashCode());
-        result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
-        result = prime * result + ((getPhone() == null) ? 0 : getPhone().hashCode());
-        result = prime * result + ((getAddress() == null) ? 0 : getAddress().hashCode());
-        result = prime * result + ((getTopDegree() == null) ? 0 : getTopDegree().hashCode());
-        result = prime * result + ((getSchool() == null) ? 0 : getSchool().hashCode());
-        result = prime * result + ((getDepartmentId() == null) ? 0 : getDepartmentId().hashCode());
-        result = prime * result + ((getSpecialtyId() == null) ? 0 : getSpecialtyId().hashCode());
-        result = prime * result + ((getPositionId() == null) ? 0 : getPositionId().hashCode());
-        result = prime * result + ((getLanguageLevel() == null) ? 0 : getLanguageLevel().hashCode());
-        result = prime * result + ((getComputerLevel() == null) ? 0 : getComputerLevel().hashCode());
-        result = prime * result + ((getBeginDate() == null) ? 0 : getBeginDate().hashCode());
-        result = prime * result + ((getEndDate() == null) ? 0 : getEndDate().hashCode());
-        return result;
-    }
+//
+//    @Override
+//    public boolean equals(Object that) {
+//        if (this == that) {
+//            return true;
+//        }
+//        if (that == null) {
+//            return false;
+//        }
+//        if (getClass() != that.getClass()) {
+//            return false;
+//        }
+//        Student other = (Student) that;
+//        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+//            && (this.getStudentId() == null ? other.getStudentId() == null : this.getStudentId().equals(other.getStudentId()))
+//            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+//            && (this.getGender() == null ? other.getGender() == null : this.getGender().equals(other.getGender()))
+//            && (this.getBirthday() == null ? other.getBirthday() == null : this.getBirthday().equals(other.getBirthday()))
+//            && (this.getIdCard() == null ? other.getIdCard() == null : this.getIdCard().equals(other.getIdCard()))
+//            && (this.getNationId() == null ? other.getNationId() == null : this.getNationId().equals(other.getNationId()))
+//            && (this.getNativePlace() == null ? other.getNativePlace() == null : this.getNativePlace().equals(other.getNativePlace()))
+//            && (this.getPoliticId() == null ? other.getPoliticId() == null : this.getPoliticId().equals(other.getPoliticId()))
+//            && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
+//            && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
+//            && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
+//            && (this.getTopDegree() == null ? other.getTopDegree() == null : this.getTopDegree().equals(other.getTopDegree()))
+//            && (this.getSchool() == null ? other.getSchool() == null : this.getSchool().equals(other.getSchool()))
+//            && (this.getDepartmentId() == null ? other.getDepartmentId() == null : this.getDepartmentId().equals(other.getDepartmentId()))
+//            && (this.getSpecialtyId() == null ? other.getSpecialtyId() == null : this.getSpecialtyId().equals(other.getSpecialtyId()))
+//            && (this.getPositionId() == null ? other.getPositionId() == null : this.getPositionId().equals(other.getPositionId()))
+//            && (this.getLanguageLevel() == null ? other.getLanguageLevel() == null : this.getLanguageLevel().equals(other.getLanguageLevel()))
+//            && (this.getComputerLevel() == null ? other.getComputerLevel() == null : this.getComputerLevel().equals(other.getComputerLevel()))
+//            && (this.getBeginDate() == null ? other.getBeginDate() == null : this.getBeginDate().equals(other.getBeginDate()))
+//            && (this.getEndDate() == null ? other.getEndDate() == null : this.getEndDate().equals(other.getEndDate()));
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        final int prime = 31;
+//        int result = 1;
+//        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+//        result = prime * result + ((getStudentId() == null) ? 0 : getStudentId().hashCode());
+//        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+//        result = prime * result + ((getGender() == null) ? 0 : getGender().hashCode());
+//        result = prime * result + ((getBirthday() == null) ? 0 : getBirthday().hashCode());
+//        result = prime * result + ((getIdCard() == null) ? 0 : getIdCard().hashCode());
+//        result = prime * result + ((getNationId() == null) ? 0 : getNationId().hashCode());
+//        result = prime * result + ((getNativePlace() == null) ? 0 : getNativePlace().hashCode());
+//        result = prime * result + ((getPoliticId() == null) ? 0 : getPoliticId().hashCode());
+//        result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
+//        result = prime * result + ((getPhone() == null) ? 0 : getPhone().hashCode());
+//        result = prime * result + ((getAddress() == null) ? 0 : getAddress().hashCode());
+//        result = prime * result + ((getTopDegree() == null) ? 0 : getTopDegree().hashCode());
+//        result = prime * result + ((getSchool() == null) ? 0 : getSchool().hashCode());
+//        result = prime * result + ((getDepartmentId() == null) ? 0 : getDepartmentId().hashCode());
+//        result = prime * result + ((getSpecialtyId() == null) ? 0 : getSpecialtyId().hashCode());
+//        result = prime * result + ((getPositionId() == null) ? 0 : getPositionId().hashCode());
+//        result = prime * result + ((getLanguageLevel() == null) ? 0 : getLanguageLevel().hashCode());
+//        result = prime * result + ((getComputerLevel() == null) ? 0 : getComputerLevel().hashCode());
+//        result = prime * result + ((getBeginDate() == null) ? 0 : getBeginDate().hashCode());
+//        result = prime * result + ((getEndDate() == null) ? 0 : getEndDate().hashCode());
+//        return result;
+//    }
 
     @Override
     public String toString() {
