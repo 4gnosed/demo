@@ -108,7 +108,7 @@ public class AsynchronizedTest {
 //            }
 //        }, pool);
 
-        log.info("" + result.get());
+        log.info("result:" + result.get());
     }
 
     /**
